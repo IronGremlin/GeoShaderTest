@@ -1,5 +1,59 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3782352261885955600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea88b8bfbd93941b433ee338a4192d, type: 3}
+  m_Name: Composite
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 550
+    blitMaterial: {fileID: 2100000, guid: d11ad5cac6e992a438048de085a50064, type: 2}
+    blitMaterialPassIndex: 4
+    setInverseViewMatrix: 0
+    requireDepthNormals: 0
+    srcType: 0
+    srcTextureId: _LowResDepth
+    srcTextureObject: {fileID: 0}
+    dstType: 0
+    dstTextureId: _BlitPassTexture
+    dstTextureObject: {fileID: 0}
+    overrideGraphicsFormat: 0
+    graphicsFormat: 4
+--- !u!114 &-915886165475726249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea88b8bfbd93941b433ee338a4192d, type: 3}
+  m_Name: GodRaysGaussianX
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 550
+    blitMaterial: {fileID: 2100000, guid: d11ad5cac6e992a438048de085a50064, type: 2}
+    blitMaterialPassIndex: 2
+    setInverseViewMatrix: 0
+    requireDepthNormals: 0
+    srcType: 2
+    srcTextureId: _CameraColorTexture
+    srcTextureObject: {fileID: 8400000, guid: 9d03f6668d3b54d4fafd6bcc9b664daa, type: 2}
+    dstType: 2
+    dstTextureId: _BlitPassTexture
+    dstTextureObject: {fileID: 8400000, guid: 9d03f6668d3b54d4fafd6bcc9b664daa, type: 2}
+    overrideGraphicsFormat: 0
+    graphicsFormat: 4
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,8 +68,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debugShaders:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
-  m_RendererFeatures: []
-  m_RendererFeatureMap: 
+  m_RendererFeatures:
+  - {fileID: 7537335367756989897}
+  - {fileID: -915886165475726249}
+  - {fileID: 1445539392085637113}
+  - {fileID: 930083587182670403}
+  - {fileID: 6849699984324408068}
+  - {fileID: -3782352261885955600}
+  m_RendererFeatureMap: c9c5241c95fe996857ec1f94621e4af3f93719166b960f1443b271411852e80c04b3a72fd8050f5ff071e456a86282cb
   m_UseNativeRenderPass: 0
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
   xrSystemData: {fileID: 11400000, guid: 60e1133243b97e347b653163a8c01b64, type: 2}
@@ -40,7 +100,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_DefaultStencilState:
     overrideStencilState: 0
-    stencilReference: 0
+    stencilReference: 1
     stencilCompareFunction: 8
     passOperation: 2
     failOperation: 0
@@ -53,3 +113,111 @@ MonoBehaviour:
   m_ClusteredRendering: 0
   m_TileSize: 32
   m_IntermediateTextureMode: 1
+--- !u!114 &930083587182670403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea88b8bfbd93941b433ee338a4192d, type: 3}
+  m_Name: GodRaysDepthSample
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 550
+    blitMaterial: {fileID: 2100000, guid: d11ad5cac6e992a438048de085a50064, type: 2}
+    blitMaterialPassIndex: 5
+    setInverseViewMatrix: 0
+    requireDepthNormals: 0
+    srcType: 0
+    srcTextureId: _CameraColorTexture
+    srcTextureObject: {fileID: 0}
+    dstType: 1
+    dstTextureId: _LowResDepth
+    dstTextureObject: {fileID: 0}
+    overrideGraphicsFormat: 0
+    graphicsFormat: 4
+--- !u!114 &1445539392085637113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea88b8bfbd93941b433ee338a4192d, type: 3}
+  m_Name: GodRaysGaussianY
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 550
+    blitMaterial: {fileID: 2100000, guid: d11ad5cac6e992a438048de085a50064, type: 2}
+    blitMaterialPassIndex: 3
+    setInverseViewMatrix: 0
+    requireDepthNormals: 0
+    srcType: 2
+    srcTextureId: _CameraColorTexture
+    srcTextureObject: {fileID: 8400000, guid: 9d03f6668d3b54d4fafd6bcc9b664daa, type: 2}
+    dstType: 1
+    dstTextureId: _VolumetricTexture
+    dstTextureObject: {fileID: 8400000, guid: 9d03f6668d3b54d4fafd6bcc9b664daa, type: 2}
+    overrideGraphicsFormat: 0
+    graphicsFormat: 4
+--- !u!114 &6849699984324408068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea88b8bfbd93941b433ee338a4192d, type: 3}
+  m_Name: Debug
+  m_EditorClassIdentifier: 
+  m_Active: 0
+  settings:
+    Event: 550
+    blitMaterial: {fileID: 2100000, guid: d11ad5cac6e992a438048de085a50064, type: 2}
+    blitMaterialPassIndex: 1
+    setInverseViewMatrix: 0
+    requireDepthNormals: 0
+    srcType: 0
+    srcTextureId: _LowResDepth
+    srcTextureObject: {fileID: 8400000, guid: 9d03f6668d3b54d4fafd6bcc9b664daa, type: 2}
+    dstType: 0
+    dstTextureId: _BlitPassTexture
+    dstTextureObject: {fileID: 0}
+    overrideGraphicsFormat: 0
+    graphicsFormat: 4
+--- !u!114 &7537335367756989897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dea88b8bfbd93941b433ee338a4192d, type: 3}
+  m_Name: GodRaysLowRes
+  m_EditorClassIdentifier: 
+  m_Active: 1
+  settings:
+    Event: 550
+    blitMaterial: {fileID: 2100000, guid: d11ad5cac6e992a438048de085a50064, type: 2}
+    blitMaterialPassIndex: 0
+    setInverseViewMatrix: 1
+    requireDepthNormals: 1
+    srcType: 0
+    srcTextureId: 
+    srcTextureObject: {fileID: 0}
+    dstType: 2
+    dstTextureId: _VolumetricTexture
+    dstTextureObject: {fileID: 8400000, guid: 9d03f6668d3b54d4fafd6bcc9b664daa, type: 2}
+    overrideGraphicsFormat: 0
+    graphicsFormat: 4

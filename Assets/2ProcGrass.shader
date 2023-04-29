@@ -94,19 +94,20 @@ Shader "Custom/ProceduralGrass"
 				float4 shadowColor = lerp(0.0f, 1.0f, shadowAttenuation);
 				color *= shadowColor;
 //#endif
-				return color; //* lerp(_BaseColor, _TipColor, i.uv.y);
+				return color * lerp(_BaseColor, _TipColor, i.uv.y);
 			}
 
             ENDHLSL
         }
 
-		Pass
+		/*Pass
 		{
 			Name "ShadowCaster"
 			Tags { "LightMode" = "ShadowCaster" }
 
-			ZWrite On
-			ZTest LEqual
+			
+			Blend One Zero
+			AlphaToMask On
 
 			HLSLPROGRAM
 			#pragma vertex shadowVert
@@ -152,7 +153,7 @@ Shader "Custom/ProceduralGrass"
 			}
 
 			ENDHLSL
-		}
+		} */
     }
 	Fallback Off
 }

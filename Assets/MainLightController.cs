@@ -2,17 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteAlways]
 public class MainLightController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+       
 
     // Update is called once per frame
     void Update()
     {
+        Light myLight = GetComponent<Light>();
+        Shader.SetGlobalVector("_SceneLightColor", myLight.color);
+        Shader.SetGlobalVector("_SceneLightDirection", transform.forward);
         
     }
 }

@@ -125,7 +125,7 @@ public class TerrainGen : MonoBehaviour
         MeshRenderer renderer = ground.AddComponent<MeshRenderer>();
         filter.sharedMesh = mesh.CreateMesh();
         ground.AddComponent<MeshCollider>();
-        renderer.material = new Material(groundMaterial);
+        renderer.sharedMaterial = groundMaterial;
     }
     public void MakeInteresting() {
         if (ground != null)
@@ -159,7 +159,7 @@ public class TerrainGen : MonoBehaviour
         filter.sharedMesh = mesh.CreateMesh();
         ground.AddComponent<MeshCollider>();
         
-        renderer.material = new Material(groundMaterial);
+        renderer.sharedMaterial = groundMaterial;
 
     }
 
@@ -218,12 +218,16 @@ public class TerrainGen : MonoBehaviour
             transformMatrixBuffer = new GraphicsBuffer(GraphicsBuffer.Target.Append, terrainTriangleCount, sizeof(float) * 16);
             computeShader.SetBuffer(kernel, "_TransformMatrices", transformMatrixBuffer);
 
-            // Set bounds.
-            MeshRenderer meshRenderer = ground.GetComponent<MeshRenderer>();
+        // Set bounds.
 
-            bounds = new Bounds(Vector3.zero, meshRenderer.bounds.size * 2);
-            bounds.Expand(maxBladeHeight * 3f);
-            bounds.center = meshRenderer.bounds.center;
+
+        Vector3 boundsmax = Vector3.zero;
+        boundsmax += Vector3.up + Vector3.forward + Vector3.right;
+        boundsmax *= Radius * 4;
+
+        bounds = new Bounds(RayTarget.position, boundsmax);
+            
+            
 
 
 
@@ -261,9 +265,15 @@ public class TerrainGen : MonoBehaviour
     // Run a single draw call to render all the grass blade meshes each frame.
     private void Update()
     {
+        //Vector3 boundsmax = Vector3.forward + Vector3.up + Vector3.right;
+        //boundsmax = boundsmax.normalized * 30;
+        //bounds = new Bounds(RayTarget.position, boundsmax);
+        bounds.center = RayTarget.position;
+        
+        Debug.Log($"Bounds Center: {bounds.center}, Bounds size: {bounds.size}");
         Vector2 last = new Vector2(lastSplat.x, lastSplat.z);
         Vector2 current = new Vector2(RayTarget.position.x, RayTarget.position.z);
-        if (Vector2.Distance(last, current) >= (.125 * Radius)) {
+        if (Vector2.Distance(last, current) >= 1) {
             properties.Clear();
             // Grass data for RenderPrimitives.
             Vector3[] grassVertices = grassMesh.vertices;
@@ -288,22 +298,16 @@ public class TerrainGen : MonoBehaviour
             lastSplat = RayTarget.position;
             RunComputeShader();
         }
+        bounds.center = RayTarget.position;
 
-        /*
-        RenderParams rp = new RenderParams(material);
-        rp.worldBounds = bounds;
-        rp.matProps = new MaterialPropertyBlock();
-        rp.matProps.SetBuffer("_TransformMatrices", transformMatrixBuffer);
-        rp.matProps.SetBuffer("_Positions", grassVertexBuffer);
-        rp.matProps.SetBuffer("_UVs", grassUVBuffer);
-        */
+        
 
-        //Graphics.RenderPrimitivesIndexed(rp, MeshTopology.Triangles, grassTriangleBuffer, grassTriangleBuffer.count, instanceCount: terrainTriangleCount);
+        
             Graphics.DrawProcedural(grassMaterial, bounds, MeshTopology.Triangles, grassTriangleBuffer, grassTriangleBuffer.count,
             instanceCount: terrainTriangleCount,
             properties: properties,
             castShadows: UnityEngine.Rendering.ShadowCastingMode.Off,
-            receiveShadows: false);
+            receiveShadows: true);
 
     }
     private void FixedUpdate()
@@ -330,5 +334,9 @@ public class TerrainGen : MonoBehaviour
         if (Octaves < 0)
             Octaves = 0;
 
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(bounds.center, bounds.size);
     }
 }
