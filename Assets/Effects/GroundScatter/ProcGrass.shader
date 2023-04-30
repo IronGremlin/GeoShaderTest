@@ -92,22 +92,23 @@ Shader "Custom/ProceduralGrass"
 				float4 shadowCoord = GetShadowCoord(vertexInput);
 				float shadowAttenuation = saturate(MainLightRealtimeShadow(shadowCoord) + 0.25f);
 				float4 shadowColor = lerp(0.0f, 1.0f, shadowAttenuation);
-				color *= shadowColor;
+				color = float4(color.rgb * shadowColor.rgb, color.a);
 //#endif
-				return color * lerp(_BaseColor, _TipColor, i.uv.y);
+				return float4(color.rgb * lerp(_BaseColor, _TipColor, i.uv.y), color.a);
 			}
 
             ENDHLSL
         }
 
-		/*Pass
+		Pass
 		{
 			Name "ShadowCaster"
 			Tags { "LightMode" = "ShadowCaster" }
 
 			
-			Blend One Zero
-			AlphaToMask On
+			//Blend One Zero
+			//AlphaToMask On
+			
 
 			HLSLPROGRAM
 			#pragma vertex shadowVert
@@ -153,7 +154,7 @@ Shader "Custom/ProceduralGrass"
 			}
 
 			ENDHLSL
-		} */
+		}
     }
 	Fallback Off
 }

@@ -220,7 +220,7 @@ MonoBehaviour:
   Octaves: 4
   computeShader: {fileID: 7200000, guid: 508746c02fc2fac439ed8d9f25cdcea9, type: 3}
   rayCastComputer: {fileID: 7200000, guid: 7940fd870a5ee424c9e48ec292e15121, type: 3}
-  grassMesh: {fileID: -3453120069734752900, guid: 3729046916a70a04d89b2eac05829138, type: 3}
+  grassMesh: {fileID: -6288988204977491114, guid: 7c6223f3f9bfca14f8f2092adfa4cb50, type: 3}
   grassMaterial: {fileID: 2100000, guid: be7bfcc90abb884449ac859e16eea5ab, type: 2}
   scale: 1
   minBladeHeight: 0.5
@@ -228,7 +228,7 @@ MonoBehaviour:
   minOffset: -0.1
   maxOffset: 0.1
   Radius: 200
-  RayTarget: {fileID: 2090936283}
+  RayTarget: {fileID: 1318717299}
 --- !u!4 &739083424
 Transform:
   m_ObjectHideFlags: 0
