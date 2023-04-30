@@ -85,7 +85,6 @@ Shader "Custom/ProceduralGrass"
 			{
 				float4 color = tex2D(_BaseTex, i.uv);
 
-//#ifdef _MAIN_LIGHT_SHADOWS
 				VertexPositionInputs vertexInput = (VertexPositionInputs)0;
 				vertexInput.positionWS = i.positionWS;
 
@@ -93,7 +92,6 @@ Shader "Custom/ProceduralGrass"
 				float shadowAttenuation = saturate(MainLightRealtimeShadow(shadowCoord) + 0.25f);
 				float4 shadowColor = lerp(0.0f, 1.0f, shadowAttenuation);
 				color = float4(color.rgb * shadowColor.rgb, color.a);
-//#endif
 				return float4(color.rgb * lerp(_BaseColor, _TipColor, i.uv.y), color.a);
 			}
 
