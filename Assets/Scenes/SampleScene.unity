@@ -301,6 +301,57 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 483cb68c96fbd044fbc109c56f8486bb, type: 3}
+--- !u!1 &948389054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 948389056}
+  - component: {fileID: 948389055}
+  m_Layer: 0
+  m_Name: TextureBaker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &948389055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948389054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a94936a2301ce5c49baf8fb5a357abd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GenerateBlankInputTexture: 1
+  SuppliedInputTexture: {fileID: 0}
+  FileName: WindTextureTest.png
+  ProcessingShader: {fileID: 2100000, guid: 2427d0af159d9654a98a7e14452a10b8, type: 2}
+  MaterialPass: 
+  ImageWidth: 1000
+  ImageHeight: 1000
+--- !u!4 &948389056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948389054}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -133.9219, y: 58.10965, z: 144.69785}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1113541001
 PrefabInstance:
   m_ObjectHideFlags: 0

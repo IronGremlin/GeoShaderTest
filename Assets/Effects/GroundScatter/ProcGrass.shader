@@ -5,6 +5,7 @@ Shader "Custom/ProceduralGrass"
 		_BaseColor("Base Color", Color) = (0, 0, 0, 1)
 		_TipColor("Tip Color", Color) = (1, 1, 1, 1)
 		_BaseTex("Base Texture", 2D) = "white" {}
+		_WindTex("Wind Texture", 2D) = "white" {}
 	}
 
 	SubShader
@@ -46,7 +47,9 @@ Shader "Custom/ProceduralGrass"
 				float4 _BaseColor;
 				float4 _TipColor;
 				sampler2D _BaseTex;
+				sampler2D _WindTex;
 				float4 _BaseTex_ST;
+				float4 _WindTex_ST;
 
 				float _Cutoff;
 			CBUFFER_END
@@ -73,20 +76,30 @@ Shader "Custom/ProceduralGrass"
 
 				float4 positionOS = float4(_Positions[v.vertexID], 1.0f);
 				float4x4 objectToWorld = _TransformMatrices[v.instanceID];
+				float4 vertWorldPosition = mul(objectToWorld, positionOS);
+				
+				
 
-				o.positionWS = mul(objectToWorld, positionOS);
+				
+				float2 vertUV = _UVs[v.vertexID];
+				float2 timeDisplacedWorldUVs = float2(_Time.x * 0.01 * vertWorldPosition.x, vertWorldPosition.z);
+				float4 windDisplacement = tex2Dlod(_WindTex, float4(timeDisplacedWorldUVs.xy,0,0));
+				vertWorldPosition.y = vertWorldPosition.y - (windDisplacement.x * vertUV.y);
+				o.positionWS = vertWorldPosition;
 				o.positionCS = mul(UNITY_MATRIX_VP, o.positionWS);
-				o.uv = _UVs[v.vertexID];
-
+				o.uv = vertUV;
+				
 				return o;
 			}
 
 			float4 frag(v2f i) : SV_Target
 			{
 				float4 color = tex2D(_BaseTex, i.uv);
+				
 
 				VertexPositionInputs vertexInput = (VertexPositionInputs)0;
 				vertexInput.positionWS = i.positionWS;
+				
 
 				float4 shadowCoord = GetShadowCoord(vertexInput);
 				float shadowAttenuation = saturate(MainLightRealtimeShadow(shadowCoord) + 0.25f);
